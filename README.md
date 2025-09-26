@@ -1,7 +1,9 @@
 # End-to-End-Pipeline-for-Robotics-ML-Training_NEW_OBJECT_EXTERNAL
-End to End pipeline to use Nvidia's TAO Toolkit, based on Nvidia's tutorial, and adapts it to train a model to find any object of interest (in this example, cardboxes)
+- End to End pipeline to use Nvidia's TAO Toolkit, based on Nvidia's tutorial, and adapts it to train a model to find any object of interest (in this example, cardboxes)
+- The code and models provided in the original documentation are brittle. They will eventually produce label files with size = 0, blank images, bounding boxes with width = 0, tfrecord files with size = 0 etc.
+- This document explains how to fix that
 
-# End-to-End-Pipeline-for-Robotics-ML-Training-with-Synthetic-Data-on-Nvidia-Isaac-SIM
+- from COURSE: Synthetic Data Generation for Perception Model Training in Isaac Sim https://learn.nvidia.com/courses/course?course_id=course-v1:DLI+S-OV-30+V1&unit=block-v1:DLI+S-OV-30+V1+type@vertical+block@7fecaf9f66204c0ea35402fca5ae1b25
 
 ## Describing the different files used in the process:
 
@@ -181,8 +183,7 @@ Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training
 
 ###### Data Cleanup 1: Filter out problematic image and label files (not in the original documentation)
 
-- The code and models provided in the original documentation are brittle. They will eventually produce label files with size = 0, blank images, bounding boxes with width = 0, tfrecord files with size = 0 etc. 
-- These data cleanup scripts are meant to correct that and delete such files 
+- These data cleanup scripts are meant to correct that and delete such files with size = 0, blank images, bounding boxes with width = 0. 
 - Before "3. Convert Dataset to TFRecords for TAO", add this script: 
 ```
 import os
