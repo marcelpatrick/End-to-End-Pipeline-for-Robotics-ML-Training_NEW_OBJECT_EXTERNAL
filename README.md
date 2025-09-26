@@ -1,35 +1,35 @@
 # End-to-End-Pipeline-for-Robotics-ML-Training_NEW_OBJECT_EXTERNAL
-End to End pipeline to use Nvidia's TAO Toolkit, based on Nvidia's tutorial, and adapts it to train a model to find any object of interest 
+End to End pipeline to use Nvidia's TAO Toolkit, based on Nvidia's tutorial, and adapts it to train a model to find any object of interest (in this example, cardboxes)
 
 # End-to-End-Pipeline-for-Robotics-ML-Training-with-Synthetic-Data-on-Nvidia-Isaac-SIM
 
 ## Describing the different files used in the process:
 
 - generate_data.sh: 
-. Path:"C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\generate_data.sh"
-. NEW one for cardboard boxes: "generate_data_cardbox_GPT" (for Windows)
-. Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\generate_data_cardbox_GPT.sh"
-. What is it?: This script calls the data generation script "standalone_palletjack_sdg.py" (standalone_cardbox_sdg_GPT.py for the cardbox generation) and passes parameters to it. Because we want to create 3 different types of distractor objects, we need to run the data generation script 3 times, each time, passing different parameters. This scrip automates the process of running the data generation script 3 times. 
-. It saves the synthetic images generated in the folders saved in the "OUTPUT_..." variables.
+  - Path:"C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\generate_data.sh"
+  - NEW one for cardboard boxes: "generate_data_cardbox_GPT" (for Windows)
+  - Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\generate_data_cardbox_GPT.sh"
+  - What is it?: This script calls the data generation script "standalone_palletjack_sdg.py" (standalone_cardbox_sdg_GPT.py for the cardbox generation) and passes parameters to it. Because we want to create 3 different types of distractor objects, we need to run the data generation script 3 times, each time, passing different parameters. This scrip automates the process of running the data generation script 3 times. 
+  - It saves the synthetic images generated in the folders saved in the "OUTPUT_..." variables.
 
 - standalone_palletjack_sdg.py
-. Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\palletjack_sdg\standalone_palletjack_sdg.py"
-. NEW one for cardboard boxes: "standalone_cardbox_sdg_GPT"
-. Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg\standalone_cardbox_sdg_GPT.py"
-. What is it?: This is the script that actually generates the synthetic data (images). 
-. What it does:?
-   . Opens a warehouse scene in NVIDIA Isaac Sim.
-   . Spawns a few pallet jack assets (the object we want to detect).
-   . Spawns distractor props (extra objects) to make scenes varied.
-   . Randomizes camera, lighting, object poses, and materials (domain randomization).
-   . Captures images + labels using a KITTI-format "writer" to build a training dataset.
-   . In a nutshell, It loads a warehouse 3D environment from Nvidia, fetches 3D assets from the Nvidia cloud database (both objects of interest and distractors), then uses the Replicator function to randomize the position and color of these objects in the scene. 
+  - Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\palletjack_sdg\standalone_palletjack_sdg.py"
+  - NEW one for cardboard boxes: "standalone_cardbox_sdg_GPT"
+  - Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg\standalone_cardbox_sdg_GPT.py"
+  - What is it?: This is the script that actually generates the synthetic data (images). 
+  - What it does:?
+   - Opens a warehouse scene in NVIDIA Isaac Sim.
+   - Spawns a few pallet jack assets (the object we want to detect).
+   - Spawns distractor props (extra objects) to make scenes varied.
+   - Randomizes camera, lighting, object poses, and materials (domain randomization).
+   - Captures images + labels using a KITTI-format "writer" to build a training dataset.
+   - In a nutshell, It loads a warehouse 3D environment from Nvidia, fetches 3D assets from the Nvidia cloud database (both objects of interest and distractors), then uses the Replicator function to randomize the position and color of these objects in the scene. 
 
  - local_train.ipynb
- . Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\local_train.ipynb"
- . NEW one for cardboard boxes: "local_train_cardbox_GPT"
- . Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\local_train_cardbox_GPT.ipynb"
- . What is it?: A Python script on Jupyter Notebook that takes the synthetic images, trains a ML model on them and tests it to try to find the object of interest and then measures its precision. 
+  - Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\local_train.ipynb"
+  - NEW one for cardboard boxes: "local_train_cardbox_GPT"
+  - Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\local_train_cardbox_GPT.ipynb"
+  - What is it?: A Python script on Jupyter Notebook that takes the synthetic images, trains a ML model on them and tests it to try to find the object of interest and then measures its precision. 
 
 
 ## STEP BY STEP
@@ -37,52 +37,52 @@ End to End pipeline to use Nvidia's TAO Toolkit, based on Nvidia's tutorial, and
 ### 1. Generate Synthetic Data
 
 #### 1.1. Create New Folders (For Cardboxes)
- . "cardbox_sdg" folder: 
-    . Create it here: Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg"
-    . Inside "cardbox_sdg" folder: 
-    . Put "standalone_cardbox_sdg_GPT" inside
-    . create "cardbox_data" folder
-       . Create it here: Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg\cardbox_data"
-       . Inside "cardbox_data" folder
-       . create "distractors_warehouse" folder
-       . Create "distractors_additional" folder
-       . Create "no_distractors" folder
- . "resnet18_cardbox" folder:
-    . Create it here: Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\training\tao\detectnet_v2\resnet18_cardbox"
-    . This is where the ML model will save the images with annotations (identification boxes) and weights.
+- "cardbox_sdg" folder: 
+  - Create it here: Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg"
+  - Inside "cardbox_sdg" folder: 
+  - Put "standalone_cardbox_sdg_GPT" inside
+  - create "cardbox_data" folder
+   - Create it here: Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg\cardbox_data"
+   - Inside "cardbox_data" folder
+   -  create "distractors_warehouse" folder
+   - Create "distractors_additional" folder
+   - Create "no_distractors" folder
+-  "resnet18_cardbox" folder:
+  - Create it here: Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\training\tao\detectnet_v2\resnet18_cardbox"
+  - This is where the ML model will save the images with annotations (identification boxes) and weights.
 
 From COURSE: Synthetic Data Generation for Perception Model Training in Isaac Sim
 https://learn.nvidia.com/courses/course?course_id=course-v1:DLI+S-OV-30+V1&unit=block-v1:DLI+S-OV-30+V1+type@vertical+block@7fecaf9f66204c0ea35402fca5ae1b25
 Generating a Synthetic Dataset Using Replicator > Activity: Understanding Basics of the SDG Script and Activity: Running the Script for Generating Training Data
 
 #### 1.2. Clone repo: 
-. git clone https://github.com/NVIDIA-AI-IOT/synthetic_data_generation_training_workflow.git
-. OK: Cloned to "C:[REPLACE WITH YOUR LOCAL PATH]GitHub"
+- git clone https://github.com/NVIDIA-AI-IOT/synthetic_data_generation_training_workflow.git
+- OK: Cloned to "C:[REPLACE WITH YOUR LOCAL PATH]GitHub"
 
 #### 1.3. Adjust generate_data.sh to clear cache
-. NEW file for cardboxes: "generate_data_cardbox_GPT"
-. Open file with text editor
-. add "--clear-cache --clear-data" to the end of the parameters list passed for each run. eg: "cmd //c "C:\isaacsim\python.bat" $SCRIPT_PATH --height 544 --width 960 --num_frames 2000 --distractors warehouse --data_dir $OUTPUT_WAREHOUSE --clear-cache --clear-data"
+- NEW file for cardboxes: "generate_data_cardbox_GPT"
+- Open file with text editor
+- add "--clear-cache --clear-data" to the end of the parameters list passed for each run. eg: "cmd //c "C:\isaacsim\python.bat" $SCRIPT_PATH --height 544 --width 960 --num_frames 2000 --distractors warehouse --data_dir $OUTPUT_WAREHOUSE --clear-cache --clear-data"
 . This is to make sure after each run the cache is deleted to prevent the GPU from running out of memory
 
 #### 1.4. Manually Delete Cache Files
-. If previous runs have been done before, delete cache files from "C:\Users\myali\AppData\Local\ov\cache"
-. This is to make sure after each run the cache is deleted to prevent the GPU from running out of memory
+- If previous runs have been done before, delete cache files from "C:\Users\myali\AppData\Local\ov\cache"
+- This is to make sure after each run the cache is deleted to prevent the GPU from running out of memory
 
 #### 1.5. Run generate_data.sh
-1.3.1. Locate and Configure generate_data.sh
-. 2.1- Go to my address: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local". Open the file "generate_data.sh" with a text editor.
-. 2.2- Open file and insert the path where I saved Isaac SIM on my computer: eg: "C:\isaacsim"
-. 2.3. Check the path assigned to the "output variables", this is where the images will be saved
+- 1.3.1. Locate and Configure generate_data.sh
+ - 2.1- Go to my address: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local". Open the file "generate_data.sh" with a text editor.
+  - 2.2- Open file and insert the path where I saved Isaac SIM on my computer: eg: "C:\isaacsim"
+  - 2.3. Check the path assigned to the "output variables", this is where the images will be saved
 
 1.3.2. Run the script
-. Go to the folder and double click on the file: "generate_data.sh"
+- Go to the folder and double click on the file: "generate_data.sh"
    - NEW one: "generate_data_cardbox_GPT.sh"
 - it will open Isaac SIM and start generating synthetic data image files to the output folders
 
 #### 1.6. Check synthetic data generated
-. Go to path assigned to the output variables 
-. Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg\carbox_data"
+- Go to path assigned to the output variables 
+- Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\cardbox_sdg\carbox_data"
 
 _____________________________________________________________________________
 
