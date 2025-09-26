@@ -25,7 +25,7 @@ End to End pipeline to use Nvidia's TAO Toolkit, based on Nvidia's tutorial, and
    - Captures images + labels using a KITTI-format "writer" to build a training dataset.
    - In a nutshell, It loads a warehouse 3D environment from Nvidia, fetches 3D assets from the Nvidia cloud database (both objects of interest and distractors), then uses the Replicator function to randomize the position and color of these objects in the scene. 
 
- - local_train.ipynb
+- local_train.ipynb
   - Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\local_train.ipynb"
   - NEW one for cardboard boxes: "local_train_cardbox_GPT"
   - Path: "C:[REPLACE WITH YOUR LOCAL PATH]GitHub\synthetic_data_generation_training_workflow\local\local_train_cardbox_GPT.ipynb"
