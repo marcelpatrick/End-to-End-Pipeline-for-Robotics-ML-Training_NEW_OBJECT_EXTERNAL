@@ -68,7 +68,7 @@ Generating a Synthetic Dataset Using Replicator > Activity: Understanding Basics
 . This is to make sure after each run the cache is deleted to prevent the GPU from running out of memory
 
 #### 1.4. Manually Delete Cache Files
-- If previous runs have been done before, delete cache files from "C:\Users\myali\AppData\Local\ov\cache"
+- If previous runs have been done before, delete cache files from "C:[REPLACE WITH YOUR LOCAL PATH]AppData\Local\ov\cache"
 - This is to make sure after each run the cache is deleted to prevent the GPU from running out of memory
 
 #### 1.5. Run generate_data.sh
@@ -120,7 +120,7 @@ https://learn.nvidia.com/courses/course?course_id=course-v1:DLI+S-OV-30+V1&unit=
 
 - 5- Navigate to the mounted folder in Ubuntu with the jupyter notebook
   - navigate, in Ubuntu CLI, to folder where the GitHub project for synthetic data generation was cloned (from project https://learn.nvidia.com/courses/course?course_id=course-v1:DLI+S-OV-30+V1&unit=block-v1:DLI+S-OV-30+V1+type@vertical+block@7fecaf9f66204c0ea35402fca5ae1b25: "Generating a Synthetic Dataset Using Replicator > Activity: Understanding Basics of the SDG Script": 
-"cd /mnt/c/Users/myali/Documents/GitHub/synthetic_data_generation_training_workflow/local"
+"cd /mnt/c/[REPLACE WITH YOUR LOCAL PATH]GitHub/synthetic_data_generation_training_workflow/local"
 
 6- Open the notebook in this folder from Ubuntu CLI: 
   - "jupyter notebook local_train.ipynb --allow-root"
