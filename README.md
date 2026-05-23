@@ -1,6 +1,6 @@
 # End-to-End-Pipeline-for-Robotics-ML-Training_NEW_OBJECT_EXTERNAL
 - End to End pipeline to use Nvidia's TAO Toolkit, based on Nvidia's tutorial, and adapts it to train a model to find any object of interest (in this example, cardboxes)
-- The code and models provided in the original documentation are brittle. They will eventually produce label files with size = 0, blank images, bounding boxes with width = 0, tfrecord files with size = 0 etc.
+- The code and models provided in the original documentation may produce label files with size = 0, blank images, bounding boxes with width = 0, tfrecord files with size = 0 etc.
 - This document explains how to fix that
 
 - from COURSE: Synthetic Data Generation for Perception Model Training in Isaac Sim https://learn.nvidia.com/courses/course?course_id=course-v1:DLI+S-OV-30+V1&unit=block-v1:DLI+S-OV-30+V1+type@vertical+block@7fecaf9f66204c0ea35402fca5ae1b25
